@@ -1,0 +1,41 @@
+mode: rule
+log-level: warning
+find-process-mode: always
+ipv6: false
+allow-lan: false
+external-controller: 127.0.0.1:41234
+secret: s3cret
+profile:
+    store-selected: false
+    store-fake-ip: false
+dns:
+    enable: true
+    ipv6: false
+    respect-rules: false
+    default-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    direct-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    proxy-server-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+proxies:
+    - name: a
+      port: 1080
+      server: 127.0.0.1
+      type: socks5
+proxy-groups:
+    - name: Main
+      proxies:
+        - a
+        - DIRECT
+      type: select
+rules:
+    - GEOIP,LAN,DIRECT,no-resolve
+    - DOMAIN-SUFFIX,example.com,DIRECT
+    - MATCH,Main

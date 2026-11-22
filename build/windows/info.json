@@ -1,0 +1,15 @@
+{
+	"fixed": {
+		"file_version": "0.1.0"
+	},
+	"info": {
+		"0409": {
+			"ProductVersion": "0.1.0",
+			"CompanyName": "ctun",
+			"FileDescription": "mihomo desktop client",
+			"LegalCopyright": "© 2026 ctun",
+			"ProductName": "ctun",
+			"Comments": "This is a comment"
+		}
+	}
+}

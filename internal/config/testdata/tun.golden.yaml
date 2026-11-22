@@ -1,0 +1,90 @@
+mode: rule
+log-level: warning
+find-process-mode: always
+ipv6: false
+allow-lan: false
+external-controller: 127.0.0.1:41234
+secret: s3cret
+profile:
+    store-selected: false
+    store-fake-ip: false
+tun:
+    enable: true
+    stack: mixed
+    auto-route: true
+    auto-detect-interface: true
+    dns-hijack:
+        - any:53
+sniffer:
+    enable: true
+    override-destination: true
+    force-dns-mapping: true
+    parse-pure-ip: true
+    skip-domain:
+        - +.push.apple.com
+    sniff:
+        HTTP:
+            ports:
+                - "80"
+                - 8080-8880
+        QUIC:
+            ports:
+                - "443"
+                - "8443"
+        TLS:
+            ports:
+                - "443"
+                - "8443"
+dns:
+    enable: true
+    ipv6: false
+    enhanced-mode: fake-ip
+    fake-ip-filter:
+        - '*.lan'
+        - +.local
+        - +.localhost
+    respect-rules: false
+    default-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    direct-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    proxy-server-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+proxies:
+    - name: "\U0001F1E9\U0001F1EA DE"
+      port: 1080
+      server: de.example.com
+      type: socks5
+proxy-groups:
+    - name: PROXY
+      proxies:
+        - "\U0001F1E9\U0001F1EA DE"
+      type: select
+rule-providers:
+    geoip-ru:
+        behavior: ipcidr
+        format: mrs
+        interval: 86400
+        path: ./rules/geoip/ru.mrs
+        proxy: PROXY
+        type: http
+        url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/ru.mrs
+    geosite-category-ru:
+        behavior: domain
+        format: mrs
+        interval: 86400
+        path: ./rules/geosite/category-ru.mrs
+        proxy: PROXY
+        type: http
+        url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ru.mrs
+rules:
+    - GEOIP,LAN,DIRECT,no-resolve
+    - RULE-SET,geosite-category-ru,DIRECT
+    - RULE-SET,geoip-ru,DIRECT
+    - MATCH,PROXY

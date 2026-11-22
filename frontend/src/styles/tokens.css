@@ -1,0 +1,201 @@
+@property --s1-l {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.62;
+}
+
+@property --s1-c {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.02;
+}
+
+@property --s1-h {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 262;
+}
+
+@property --s2-l {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.72;
+}
+
+@property --s2-c {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.02;
+}
+
+@property --s2-h {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 228;
+}
+
+@property --s3-l {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.62;
+}
+
+@property --s3-c {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.02;
+}
+
+@property --s3-h {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 290;
+}
+
+@property --f1-l {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.62;
+}
+
+@property --f1-c {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.02;
+}
+
+@property --f1-h {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 262;
+}
+
+@property --f2-l {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.72;
+}
+
+@property --f2-c {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.02;
+}
+
+@property --f2-h {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 228;
+}
+
+:root {
+  color-scheme: light dark;
+  transition:
+    --s1-l 1.2s var(--ease-out),
+    --s1-c 1.2s var(--ease-out),
+    --s1-h 1.2s var(--ease-out),
+    --s2-l 1.2s var(--ease-out),
+    --s2-c 1.2s var(--ease-out),
+    --s2-h 1.2s var(--ease-out),
+    --s3-l 1.2s var(--ease-out),
+    --s3-c 1.2s var(--ease-out),
+    --s3-h 1.2s var(--ease-out),
+    --f1-l 1.2s var(--ease-out),
+    --f1-c 1.2s var(--ease-out),
+    --f1-h 1.2s var(--ease-out),
+    --f2-l 1.2s var(--ease-out),
+    --f2-c 1.2s var(--ease-out),
+    --f2-h 1.2s var(--ease-out);
+
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Cantarell', system-ui,
+    sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+
+  --text: rgb(0 0 0 / 0.92);
+  --text-secondary: rgb(0 0 0 / 0.55);
+  --text-tertiary: rgb(0 0 0 / 0.3);
+  --separator: rgb(0 0 0 / 0.08);
+
+  --content-bg: #eeeef2;
+  --surface: #ffffff;
+  --surface-hover: rgb(0 0 0 / 0.04);
+  --surface-pressed: rgb(0 0 0 / 0.08);
+  --control: #ffffff;
+  --field: #ffffff;
+  --fill: rgb(0 0 0 / 0.06);
+  --fill-strong: rgb(0 0 0 / 0.12);
+  --sheet-backdrop: rgb(0 0 0 / 0.18);
+
+  --accent: #007aff;
+  --on-accent: #ffffff;
+  --green: #28cd41;
+  --blue: #007aff;
+  --orange: #ff9500;
+  --red: #ff3b30;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-control: 0 0 0 0.5px rgb(0 0 0 / 0.14), 0 1px 1px rgb(0 0 0 / 0.06);
+  --shadow-popover: 0 0 0 0.5px rgb(0 0 0 / 0.12), 0 10px 30px rgb(0 0 0 / 0.16);
+  --popover-bg: rgb(246 246 246 / 0.82);
+  --menu-highlight: rgb(0 0 0 / 0.07);
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 22px;
+
+  --rail-width: 92px;
+  --inspector-width: 320px;
+  --titlebar-height: 52px;
+
+  --flag-l-min: 0.4;
+  --flag-l-max: 0.82;
+  --fill-l-min: 0.45;
+  --fill-l-max: 0.66;
+  --flag-1: oklch(clamp(var(--flag-l-min), var(--s1-l), var(--flag-l-max)) var(--s1-c) var(--s1-h));
+  --flag-2: oklch(clamp(var(--flag-l-min), var(--s2-l), var(--flag-l-max)) var(--s2-c) var(--s2-h));
+  --flag-3: oklch(clamp(var(--flag-l-min), var(--s3-l), var(--flag-l-max)) var(--s3-c) var(--s3-h));
+  --flag: linear-gradient(90deg, var(--flag-1), var(--flag-2), var(--flag-3));
+  --brand-a: oklch(clamp(var(--fill-l-min), var(--f1-l), var(--fill-l-max)) var(--f1-c) var(--f1-h));
+  --brand-b: oklch(clamp(var(--fill-l-min), var(--f2-l), var(--fill-l-max)) var(--f2-c) var(--f2-h));
+  --brand: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  --brand-soft: color-mix(in srgb, var(--brand-a) 12%, transparent);
+  --glow: color-mix(in srgb, var(--brand-a) 45%, transparent);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: rgb(255 255 255 / 0.95);
+    --text-secondary: rgb(255 255 255 / 0.6);
+    --text-tertiary: rgb(255 255 255 / 0.3);
+    --separator: rgb(255 255 255 / 0.08);
+
+    --content-bg: #000000;
+    --surface: #1c1c1e;
+    --surface-hover: rgb(255 255 255 / 0.06);
+    --surface-pressed: rgb(255 255 255 / 0.1);
+    --control: #3a3a3c;
+    --field: #2c2c2e;
+    --fill: #2c2c2e;
+    --fill-strong: #3a3a3c;
+    --sheet-backdrop: rgb(0 0 0 / 0.35);
+
+    --accent: #0a84ff;
+    --flag-l-min: 0.5;
+    --flag-l-max: 0.92;
+    --fill-l-min: 0.5;
+    --fill-l-max: 0.7;
+    --green: #32d74b;
+    --blue: #0a84ff;
+    --orange: #ff9f0a;
+    --red: #ff453a;
+
+    --shadow-card: none;
+    --shadow-control: 0 0 0 0.5px rgb(255 255 255 / 0.1), 0 1px 1px rgb(0 0 0 / 0.2);
+    --shadow-popover: 0 0 0 0.5px rgb(255 255 255 / 0.14), 0 10px 30px rgb(0 0 0 / 0.5);
+    --popover-bg: rgb(48 48 50 / 0.8);
+    --menu-highlight: rgb(255 255 255 / 0.09);
+  }
+}

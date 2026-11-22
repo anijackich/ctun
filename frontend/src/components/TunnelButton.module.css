@@ -1,0 +1,131 @@
+.dial {
+  --ticks: 72;
+  --radius: 54px;
+  --length: 26px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 176px;
+  height: 176px;
+  flex-shrink: 0;
+}
+
+.tick {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(calc(var(--i) * 360deg / var(--ticks))) translateY(calc(var(--radius) * -1))
+    scaleY(var(--amp));
+  transition: transform 0.95s var(--ease-out);
+}
+
+.bar {
+  position: absolute;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  height: var(--length);
+  border-radius: 1px;
+  background: var(--text-tertiary);
+  transform-origin: bottom;
+  transition:
+    background-color 0.6s,
+    opacity 0.6s;
+}
+
+.dial[data-status='running'] .bar {
+  background: var(--c);
+  animation: shimmer 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -2.4s / var(--ticks) * 3);
+}
+
+.dial[data-status='starting'] .bar {
+  background: var(--c);
+  animation: sweep 0.9s linear infinite;
+  animation-delay: calc(var(--i) * 0.9s / var(--ticks));
+}
+
+.dial[data-status='stopping'] .bar {
+  opacity: 0.5;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    transform: scaleY(0.78);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: scaleY(3.2);
+    opacity: 1;
+  }
+  35%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.2;
+  }
+}
+
+.button {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: var(--surface);
+  box-shadow:
+    var(--shadow-control),
+    0 6px 18px rgb(0 0 0 / 0.12);
+  transition:
+    color 0.4s,
+    box-shadow 0.6s,
+    transform 0.25s var(--ease-out);
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--brand);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.button:hover:not(:disabled) {
+  transform: scale(1.04);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.dial[data-status='running'] .button {
+  color: var(--on-accent);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.14) inset,
+    0 10px 36px var(--glow);
+}
+
+.dial[data-status='running'] .button::before {
+  opacity: 1;
+}
+
+.dial[data-status='starting'] .button,
+.dial[data-status='stopping'] .button {
+  color: var(--brand-a);
+}

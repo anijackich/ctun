@@ -1,0 +1,27 @@
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  z-index: 10;
+  width: 8px;
+  cursor: col-resize;
+  touch-action: none;
+  --wails-draggable: no-drag;
+}
+
+.handle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 3.5px;
+  width: 1px;
+  background: transparent;
+  transition: background-color 0.2s;
+}
+
+.handle:hover::after,
+.handle:active::after {
+  background: color-mix(in srgb, var(--brand-a) 70%, transparent);
+}

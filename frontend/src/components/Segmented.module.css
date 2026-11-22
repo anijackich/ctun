@@ -1,0 +1,37 @@
+.root {
+  display: inline-flex;
+  padding: 3px;
+  gap: 3px;
+  border-radius: 999px;
+  background: var(--fill);
+}
+
+.segment {
+  min-width: 84px;
+  height: 28px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    box-shadow 0.3s;
+}
+
+.segment:hover:not([aria-checked='true'], :disabled) {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.segment[aria-checked='true'] {
+  color: var(--on-accent);
+  background: var(--brand);
+  box-shadow: 0 4px 14px var(--glow);
+}
+
+.segment:disabled {
+  color: var(--text-tertiary);
+}

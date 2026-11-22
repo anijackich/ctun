@@ -1,0 +1,61 @@
+version: '3'
+
+vars:
+  APP_NAME: "ctun"
+  BIN_DIR: "bin"
+  PACKAGE_MANAGER: '{{.PACKAGE_MANAGER | default "pnpm"}}'
+  VITE_PORT: '{{.WAILS_VITE_PORT | default 9245}}'
+  GOOS: '{{.GOOS | default OS}}'
+  CORE_VERSION: v1.19.34
+  VERSION:
+    sh: t=$(git describe --tags --match 'v[0-9]*' --abbrev=0 2>/dev/null) && echo "${t#v}" || echo 0.0.0
+  VERSION_FULL:
+    sh: t=$(git describe --tags --match 'v[0-9]*' --dirty 2>/dev/null) && echo "${t#v}" || echo "0.0.0-$(git rev-parse --short HEAD)"
+  BUILD_NUMBER:
+    sh: git rev-list --count HEAD
+
+includes:
+  common: ./build/Taskfile.yml
+  windows: ./build/windows/Taskfile.yml
+  darwin: ./build/darwin/Taskfile.yml
+  linux: ./build/linux/Taskfile.yml
+
+tasks:
+  build:
+    summary: Builds the application
+    cmds:
+      - task: "{{.GOOS}}:build"
+
+  package:
+    summary: Packages a production build of the application
+    cmds:
+      - task: "{{.GOOS}}:package"
+
+  run:
+    summary: Runs the application
+    cmds:
+      - task: "{{.GOOS}}:run"
+
+  core:fetch:
+    summary: Downloads the pinned mihomo core into core/ (CORE_SRC=/path copies a local binary)
+    vars:
+      CORE_ARCH: '{{.CORE_ARCH | default ARCH}}'
+    status:
+      - test -x core/mihomo-{{.GOOS}}-{{.CORE_ARCH}}
+    cmds:
+      - scripts/fetch-core.sh {{.CORE_VERSION}} {{.GOOS}} {{.CORE_ARCH}}
+
+  dev:
+    summary: Runs the application in development mode
+    cmds:
+      - wails3 dev -config ./build/config.yml -port {{.VITE_PORT}}
+
+  install:msix:tools:
+    summary: Installs tools required for Windows MSIX packaging
+    cmds:
+      - task: windows:install:msix:tools
+
+  setup:docker:
+    summary: Builds Docker image for cross-compilation (~800MB download)
+    cmds:
+      - task: common:setup:docker

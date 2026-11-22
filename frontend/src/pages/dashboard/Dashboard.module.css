@@ -1,0 +1,247 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 20px 20px;
+  overflow-y: auto;
+}
+
+.connection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 8px 24px 8px 14px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  isolation: isolate;
+}
+
+.aurora {
+  position: absolute;
+  inset: -50% -10% -50% -20%;
+  z-index: -1;
+  background:
+    radial-gradient(35% 60% at 14% 50%, var(--brand-a), transparent 70%),
+    radial-gradient(30% 55% at 75% 30%, var(--brand-b), transparent 70%);
+  filter: blur(42px);
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
+  animation: drift 16s ease-in-out infinite alternate;
+}
+
+.connection[data-status='running'] .aurora {
+  opacity: 0.15;
+}
+
+.connection[data-status='starting'] .aurora {
+  opacity: 0.07;
+}
+
+@keyframes drift {
+  to {
+    transform: translate(6%, -4%) rotate(4deg) scale(1.05);
+  }
+}
+
+.connectionBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.statusLine {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.statusTitle {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.connection[data-status='running'] .statusTitle {
+  background: var(--flag);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.uptime {
+  color: var(--text-secondary);
+}
+
+.via {
+  overflow: hidden;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.viaProfile {
+  color: var(--text-tertiary);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.wide {
+  grid-column: span 2;
+}
+
+.speeds {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 6px 22px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metric > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.metric[data-large] > span:last-child {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.metricLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.metric:not([data-large]) > span:last-child {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.down {
+  color: var(--brand-b);
+}
+
+.up {
+  color: var(--text-tertiary);
+}
+
+.chart {
+  position: relative;
+  margin: 4px -16px -14px;
+}
+
+.idle {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text-tertiary);
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nodeFlag {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.nodeText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nodeName {
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.muted {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 4px 0 0;
+}
+
+.facts dt {
+  color: var(--text-secondary);
+}
+
+.facts dd {
+  margin: 0;
+  justify-self: end;
+  font-weight: 600;
+}
+
+.modeBadge {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  color: var(--on-accent);
+  background: var(--brand);
+}
+
+.error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-top: 6px;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.proxyAddress {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: -6px;
+}
+
+.exit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}

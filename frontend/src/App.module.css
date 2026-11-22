@@ -1,0 +1,36 @@
+.window {
+  display: flex;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--content-bg);
+  box-shadow: -0.5px 0 0 var(--separator);
+}
+
+.inspectorSlot {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 0;
+  flex-shrink: 0;
+  transition: width 0.4s var(--ease-out);
+}
+
+.inspectorSlot:not([data-open]) {
+  overflow: hidden;
+}
+
+.inspectorSlot[data-resizing] {
+  transition: none;
+  cursor: col-resize;
+  user-select: none;
+}
+
+.inspectorSlot[data-open] {
+  width: var(--inspector-width);
+}

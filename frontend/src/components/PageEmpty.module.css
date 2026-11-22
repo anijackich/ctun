@@ -1,0 +1,7 @@
+.empty {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  margin: 0;
+  color: var(--text-tertiary);
+}

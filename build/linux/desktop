@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=ctun
+Comment=mihomo desktop client
+Exec=/usr/local/bin/ctun %u
+Terminal=false
+Type=Application
+Icon=ctun
+Categories=Utility;
+StartupWMClass=ctun

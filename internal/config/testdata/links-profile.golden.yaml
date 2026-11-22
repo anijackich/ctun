@@ -1,0 +1,74 @@
+mode: rule
+log-level: warning
+find-process-mode: always
+ipv6: false
+allow-lan: false
+external-controller: 127.0.0.1:41234
+secret: s3cret
+profile:
+    store-selected: false
+    store-fake-ip: false
+dns:
+    enable: true
+    ipv6: false
+    respect-rules: false
+    default-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    direct-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+    proxy-server-nameserver:
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+proxies:
+    - name: "\U0001F1E9\U0001F1EA DE"
+      port: 443
+      server: de.example.com
+      type: vless
+      uuid: 00000000-0000-0000-0000-000000000000
+    - name: "\U0001F1EB\U0001F1EE FI"
+      port: 443
+      server: fi.example.com
+      type: vless
+      uuid: 00000000-0000-0000-0000-000000000000
+proxy-groups:
+    - name: PROXY
+      proxies:
+        - AUTO
+        - "\U0001F1E9\U0001F1EA DE"
+        - "\U0001F1EB\U0001F1EE FI"
+      type: select
+    - interval: 300
+      name: AUTO
+      proxies:
+        - "\U0001F1E9\U0001F1EA DE"
+        - "\U0001F1EB\U0001F1EE FI"
+      tolerance: 50
+      type: url-test
+      url: https://www.gstatic.com/generate_204
+rule-providers:
+    geoip-ru:
+        behavior: ipcidr
+        format: mrs
+        interval: 86400
+        path: ./rules/geoip/ru.mrs
+        proxy: PROXY
+        type: http
+        url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/ru.mrs
+    geosite-category-ru:
+        behavior: domain
+        format: mrs
+        interval: 86400
+        path: ./rules/geosite/category-ru.mrs
+        proxy: PROXY
+        type: http
+        url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ru.mrs
+rules:
+    - GEOIP,LAN,DIRECT,no-resolve
+    - RULE-SET,geosite-category-ru,DIRECT
+    - RULE-SET,geoip-ru,DIRECT
+    - MATCH,PROXY

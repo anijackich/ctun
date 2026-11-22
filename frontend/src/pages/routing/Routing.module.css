@@ -1,0 +1,196 @@
+.search {
+  width: 220px;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 0;
+  padding: 16px 20px 20px;
+  overflow-y: auto;
+}
+
+.notice {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.mode {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+  padding-left: 4px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.heading :global(.mono) {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+.heading button {
+  align-self: center;
+}
+
+.headingHint {
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.sets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 8px;
+}
+
+.set {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px 10px 12px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.setText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.setName {
+  font-size: 12px;
+}
+
+.setMeta {
+  overflow: hidden;
+  font-size: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-tertiary);
+}
+
+.spinning {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.table {
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 32px 128px minmax(0, 2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+  padding: 4px 12px;
+  /* Long profiles: rows off screen are not laid out (WebKit 18+, ignored elsewhere). */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 32px;
+}
+
+.table[data-live] .row {
+  grid-template-columns: 32px 128px minmax(0, 2fr) minmax(0, 1fr) 56px 96px 32px;
+}
+
+.row + .row {
+  border-top: 0.5px solid var(--separator);
+}
+
+.head {
+  min-height: 28px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.row[data-disabled] > :not(button) {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.index {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-align: right;
+}
+
+.type {
+  overflow: hidden;
+  font-size: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-secondary);
+}
+
+.payload,
+.target {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.payload {
+  font-size: 12px;
+}
+
+.target[data-kind='direct'] {
+  color: var(--text-secondary);
+}
+
+.target[data-kind='reject'] {
+  color: var(--red);
+}
+
+.num {
+  font-size: 12px;
+  text-align: right;
+}
+
+.lastHit {
+  font-size: 11px;
+  color: var(--text-secondary);
+}

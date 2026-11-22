@@ -1,0 +1,29 @@
+.trigger {
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 9px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  background: var(--fill);
+  white-space: nowrap;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
+}
+
+.trigger:hover,
+.trigger[data-state='open'] {
+  color: var(--text);
+}
+
+.trigger[data-active] {
+  color: var(--text);
+  background: color-mix(in srgb, var(--brand-a) 22%, var(--fill));
+}
+
+.chevron {
+  opacity: 0.6;
+}
